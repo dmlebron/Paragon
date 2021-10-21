@@ -13,6 +13,10 @@
 		75100197271F3B7500505CA3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100185271F3B7300505CA3 /* ContentView.swift */; };
 		75100198271F3B7500505CA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75100186271F3B7500505CA3 /* Assets.xcassets */; };
 		75100199271F3B7500505CA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75100186271F3B7500505CA3 /* Assets.xcassets */; };
+		751001A8271F3CAB00505CA3 /* KidList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751001A7271F3CAB00505CA3 /* KidList.swift */; };
+		751001A9271F3CAB00505CA3 /* KidList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751001A7271F3CAB00505CA3 /* KidList.swift */; };
+		751001AB271F419500505CA3 /* KidProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751001AA271F419500505CA3 /* KidProfile.swift */; };
+		751001AC271F419500505CA3 /* KidProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751001AA271F419500505CA3 /* KidProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,8 @@
 		7510018B271F3B7500505CA3 /* Paragon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paragon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75100191271F3B7500505CA3 /* Paragon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paragon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75100193271F3B7500505CA3 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		751001A7271F3CAB00505CA3 /* KidList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidList.swift; sourceTree = "<group>"; };
+		751001AA271F419500505CA3 /* KidProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +60,13 @@
 		75100183271F3B7300505CA3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				75100184271F3B7300505CA3 /* ParagonApp.swift */,
 				75100185271F3B7300505CA3 /* ContentView.swift */,
+				751001A6271F3BC900505CA3 /* AddStar */,
+				751001A5271F3BB900505CA3 /* CreateKid */,
+				751001A4271F3BA700505CA3 /* KidProfile */,
+				751001A3271F3B9D00505CA3 /* Settings */,
+				751001A2271F3B9400505CA3 /* KidList */,
+				75100184271F3B7300505CA3 /* ParagonApp.swift */,
 				75100186271F3B7500505CA3 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -76,6 +87,43 @@
 				75100193271F3B7500505CA3 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		751001A2271F3B9400505CA3 /* KidList */ = {
+			isa = PBXGroup;
+			children = (
+				751001A7271F3CAB00505CA3 /* KidList.swift */,
+			);
+			path = KidList;
+			sourceTree = "<group>";
+		};
+		751001A3271F3B9D00505CA3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		751001A4271F3BA700505CA3 /* KidProfile */ = {
+			isa = PBXGroup;
+			children = (
+				751001AA271F419500505CA3 /* KidProfile.swift */,
+			);
+			path = KidProfile;
+			sourceTree = "<group>";
+		};
+		751001A5271F3BB900505CA3 /* CreateKid */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateKid;
+			sourceTree = "<group>";
+		};
+		751001A6271F3BC900505CA3 /* AddStar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddStar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				751001AB271F419500505CA3 /* KidProfile.swift in Sources */,
 				75100196271F3B7500505CA3 /* ContentView.swift in Sources */,
 				75100194271F3B7500505CA3 /* ParagonApp.swift in Sources */,
+				751001A8271F3CAB00505CA3 /* KidList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +235,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				751001AC271F419500505CA3 /* KidProfile.swift in Sources */,
 				75100197271F3B7500505CA3 /* ContentView.swift in Sources */,
 				75100195271F3B7500505CA3 /* ParagonApp.swift in Sources */,
+				751001A9271F3CAB00505CA3 /* KidList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
