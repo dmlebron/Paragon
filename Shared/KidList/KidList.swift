@@ -15,50 +15,74 @@ struct Kid: Identifiable {
     let starCount: Int
 }
 
-struct KidList: View {
-    var kids: [Kid] = []
-    var body: some View {
-        List(kids) { kid in
-            //            NavigationLink(destination: KidProfile(kid: kid)) {
-            KidRow(kid: kid)
-            //            }
+final class KidListViewModel: ObservableObject {
+    let actionButtonsViewModel: ActionButtonsViewModel
+    @Published
+    private(set) var kids: [Kid]
+
+    init(kids: [Kid]) {
+        self.kids = kids
+        self.actionButtonsViewModel = ActionButtonsViewModel {
+            print("Share tapped")
+        } removeAction: {
+            print("Remove tapped")
+        } addAction: {
+            print("Add tapped")
+        }
+    }
+
+    func loadKids() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.kids = [
+                Kid(
+                    name: "Brandon David Martinez Noblecilla",
+                    age: 6,
+                    image: Image("brandon"),
+                    starCount: 4
+                ),
+                Kid(
+                    name: "Eren Rhaegar Martinez Noblecilla",
+                    age: 4,
+                    image: Image("eren"),
+                    starCount: 7
+                ),
+                Kid(
+                    name: "Leah Sophia Martinez Noblecilla",
+                    age: 1,
+                    image: Image("leah"),
+                    starCount: 14
+                )
+            ]
         }
     }
 }
 
-struct KidRow: View {
-    var kid: Kid
-
+struct KidList: View {
+    @StateObject
+    var viewModel = KidListViewModel(kids: [])
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                kid.image
-                    .resizable()
-                    .scaledToFit()
-                    .clipShape(Circle())
-                    .frame(maxWidth: 100, maxHeight: 100)
-                
-                VStack(alignment: .leading) {
-                    Text(kid.name)
-                        .fontWeight(.medium)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, 4)
-                    HStack {
-                        Label {
-                            Text("\(kid.starCount)")
-                        } icon: {
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                        }
-                        .font(.title3)
+        NavigationView {
+            ScrollView {
+                LazyVStack {
+                    ForEach(viewModel.kids){ kid in
+                        KidRow(kid: kid)
                     }
-                    .padding(.bottom, 4)
-                    Text("last synced 5 minutes ago")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
                 }
             }
-            ActionButtons()
+            .navigationBarTitle("Kids")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        print("show create kid")
+                    } label: {
+                        Image(systemName: "plus.circle")
+                    }
+                    .foregroundColor(.green)
+                }
+            }
+        }
+        .onAppear {
+            viewModel.loadKids()
         }
     }
 }
@@ -66,74 +90,104 @@ struct KidRow: View {
 struct KidList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            KidList(kids: [
-                .init(
-                    name: "Brandon David Martinez Noblecilla",
-                    age: 6,
-                    image: Image("brandon"),
-                    starCount: 4
-                ),
-                .init(
-                    name: "Eren Rhaegar Martinez Noblecilla",
-                    age: 4,
-                    image: Image("eren"),
-                    starCount: 7
-                ),
-                .init(
-                    name: "Leah Sophia Martinez Noblecilla",
-                    age: 1,
-                    image: Image("leah"),
-                    starCount: 14
-                )
-            ])
-            KidList(kids: [
-                .init(
-                    name: "Brandon David Martinez Noblecilla",
-                    age: 6,
-                    image: Image("brandon"),
-                    starCount: 4
-                ),
-                .init(
-                    name: "Eren Rhaegar Martinez Noblecilla",
-                    age: 4,
-                    image: Image("eren"),
-                    starCount: 7
-                ),
-                .init(
-                    name: "Leah Sophia Martinez Noblecilla",
-                    age: 1,
-                    image: Image("leah"),
-                    starCount: 14
-                )
-            ])
-                .preferredColorScheme(.dark)
+            TabView {
+                KidList(viewModel: KidListViewModel(
+                    kids: [
+                        .init(
+                            name: "Brandon David Martinez Noblecilla",
+                            age: 6,
+                            image: Image("brandon"),
+                            starCount: 4
+                        ),
+                        .init(
+                            name: "Eren Rhaegar Martinez Noblecilla",
+                            age: 4,
+                            image: Image("eren"),
+                            starCount: 7
+                        ),
+                        .init(
+                            name: "Leah Sophia Martinez Noblecilla",
+                            age: 1,
+                            image: Image("leah"),
+                            starCount: 14
+                        )
+                    ]))
+                    .tabItem {
+                        Label("", systemImage: "list.dash")
+                            .labelStyle(IconOnlyLabelStyle())
+                    }
+                Text("Hello, world!")
+                    .tabItem {
+                        Image(systemName: "gear")
+                    }
+            }
+            .accentColor(.green)
+            TabView {
+                KidList(viewModel: KidListViewModel(
+                    kids: [
+                        .init(
+                            name: "Brandon David Martinez Noblecilla",
+                            age: 6,
+                            image: Image("brandon"),
+                            starCount: 4
+                        ),
+                        .init(
+                            name: "Eren Rhaegar Martinez Noblecilla",
+                            age: 4,
+                            image: Image("eren"),
+                            starCount: 7
+                        ),
+                        .init(
+                            name: "Leah Sophia Martinez Noblecilla",
+                            age: 1,
+                            image: Image("leah"),
+                            starCount: 14
+                        )
+                    ]))
+                    .tabItem {
+                        Label("", systemImage: "list.dash")
+                            .labelStyle(IconOnlyLabelStyle())
+                    }
+                Text("Hello, world!")
+                    .tabItem {
+                        Image(systemName: "gear")
+                    }
+            }
+            .accentColor(.green)
+            .previewDevice("iPhone SE (2nd generation)")
+            TabView {
+                KidList(viewModel: KidListViewModel(
+                    kids: [
+                        Kid(
+                            name: "Brandon David Martinez Noblecilla",
+                            age: 6,
+                            image: Image("brandon"),
+                            starCount: 4
+                        ),
+                        Kid(
+                            name: "Eren Rhaegar Martinez Noblecilla",
+                            age: 4,
+                            image: Image("eren"),
+                            starCount: 7
+                        ),
+                        Kid(
+                            name: "Leah Sophia Martinez Noblecilla",
+                            age: 1,
+                            image: Image("leah"),
+                            starCount: 14
+                        )
+                    ]))
+                    .tabItem {
+                        Label("", systemImage: "list.dash")
+                            .labelStyle(IconOnlyLabelStyle())
+                    }
+                Text("Hello, world!")
+                    .tabItem {
+                        Image(systemName: "gear")
+                    }
+            }
+            .accentColor(.green)
+            .preferredColorScheme(.dark)
         }
-    }
-}
-
-struct ActionButtons: View {
-    var body: some View {
-        HStack {
-            Button(action: {}) {
-                Label("share", systemImage: "person.crop.circle.fill")
-                    .padding(8)
-            }
-            .foregroundColor(.purple)
-            Divider()
-                .padding(.vertical, 4)
-            Button(action: {}) {
-                Label("add", systemImage: "minus.circle")
-                    .padding(8)
-            }
-            .foregroundColor(.yellow)
-            Divider()
-                .padding(.vertical, 4)
-            Button(action: {}) {
-                Label("remove", systemImage: "minus.circle")
-                    .padding(8)
-            }
-            .foregroundColor(.red)
-        }
-        .fixedSize(horizontal: true, vertical: true)
     }
 }

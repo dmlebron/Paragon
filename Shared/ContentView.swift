@@ -10,22 +10,28 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            KidList()
+            KidList(viewModel: KidListViewModel(kids: []))
                 .tabItem {
-                    Image(systemName: "list.dash")
-                    Text("List")
+                    Label("", systemImage: "list.dash")
+                        .labelStyle(IconOnlyLabelStyle())
                 }
-            Text("Hello, world!")
+            SettingsView()
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("Settings")
                 }
         }
+        .accentColor(.green)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView()
+            ContentView()
+                .previewDevice("iPhone SE (2nd generation)")
+            ContentView()
+                .preferredColorScheme(.dark)
+        }
     }
 }
