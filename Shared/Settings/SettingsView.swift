@@ -7,50 +7,6 @@
 
 import SwiftUI
 
-final class SettingsViewModel: ObservableObject {
-    enum CloudStatus: String, Identifiable {
-        case synced
-        case notSynced
-        case syncing
-
-        var id: String {
-            rawValue
-        }
-
-        var icon: Image {
-            switch self {
-            case .synced:
-                return Image(systemName: "checkmark.icloud")
-            case .notSynced:
-                return Image(systemName: "icloud.slash")
-            case .syncing:
-                return Image(systemName: "arrow.clockwise.icloud")
-            }
-        }
-    }
-    enum SubscriberStatus: String, Identifiable {
-        case premium
-        case regular
-        var id: String {
-            rawValue
-        }
-
-        var icon: Image {
-            switch self {
-            case .premium:
-                return Image(systemName: "")
-            case .regular:
-                return Image(systemName: "")
-            }
-        }
-    }
-
-    @Published
-    private(set) var cloudStatus: CloudStatus = .synced
-    @Published
-    private(set) var subscriberStatus: SubscriberStatus = .regular
-}
-
 struct SettingsView: View {
     private enum Sections: Int, CaseIterable, Identifiable {
         case premium
@@ -84,6 +40,7 @@ struct SettingsView: View {
         }
     }
 
+    var viewModel: SettingsViewModel
     var body: some View {
         NavigationView {
             List(Sections.allCases) { section in
@@ -108,13 +65,13 @@ struct SettingsView: View {
             if row == 0 {
                 VStack(alignment: .leading) {
                     Label {
-                        Text("Subscribe")
+                        Text(viewModel.subscriberStatus.title)
                     } icon: {
-                        Image(systemName: "heart")
+                        viewModel.subscriberStatus.icon
                             .foregroundColor(Color.pink)
                     }
                     .padding(.top, 2)
-                    Text("Your support it's really important to keep adding more features.")
+                    Text(viewModel.subscriberStatus.subtitle)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(2)
@@ -123,13 +80,13 @@ struct SettingsView: View {
             } else {
                 VStack(alignment: .leading) {
                     Label {
-                        Text("Synced")
+                        Text(viewModel.cloudStatus.title)
                     } icon: {
-                        Image(systemName: "cloud")
+                        viewModel.cloudStatus.icon
                             .foregroundColor(Color.blue)
                     }
                     .padding(.top, 2)
-                    Text("All your data is securely stored in iCloud and its accessible from all your devices")
+                    Text(viewModel.cloudStatus.subtitle)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(2)
@@ -188,11 +145,11 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SettingsView()
-            SettingsView()
+            SettingsView(viewModel: .init(cloudStatus: .notSynced, subscriberStatus: .regular))
+            SettingsView(viewModel: .init(cloudStatus: .synced, subscriberStatus: .premium))
                 .previewDevice("iPhone SE (2nd generation)")
                 .preferredColorScheme(.light)
-            SettingsView()
+            SettingsView(viewModel: .init())
                 .preferredColorScheme(.dark)
         }
     }

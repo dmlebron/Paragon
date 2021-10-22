@@ -15,7 +15,7 @@ struct ContentView: View {
                     Label("", systemImage: "list.dash")
                         .labelStyle(IconOnlyLabelStyle())
                 }
-            SettingsView()
+            SettingsView(viewModel: .init())
                 .tabItem {
                     Image(systemName: "gear")
                 }

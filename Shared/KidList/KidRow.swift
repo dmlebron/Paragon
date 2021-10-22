@@ -6,22 +6,33 @@
 //
 
 import SwiftUI
+final class KidRowViewModel: ObservableObject {
+    @Published
+    private(set) var kid: Kid
+    let actionButtonsViewModel: ActionButtonsViewModel
+
+    init(kid: Kid, actionButtonsViewModel: ActionButtonsViewModel) {
+        self.kid = kid
+        self.actionButtonsViewModel = actionButtonsViewModel
+    }
+}
 
 struct KidRow: View {
-    var kid: Kid
+    @State
+    var viewModel: KidRowViewModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationLink(destination: KidProfile(kid: kid)) {
+            NavigationLink(destination: KidProfile(kid: viewModel.kid)) {
                 HStack(alignment: .center) {
-                    kid.image
+                    viewModel.kid.image
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())
                         .frame(width: 100, height: 100)
 
                     VStack(alignment: .leading) {
-                        Text(kid.name)
+                        Text(viewModel.kid.name)
                             .font(.title3)
                             .fixedSize(horizontal: false, vertical: true)
                             .foregroundColor(.primary)
@@ -29,7 +40,7 @@ struct KidRow: View {
                             .padding(.bottom, 2)
                         HStack {
                             Label {
-                                Text("\(kid.starCount)")
+                                Text("\(viewModel.kid.starCount)")
                                     .foregroundColor(.secondary)
                             } icon: {
                                 Image(systemName: "star.fill")
@@ -44,7 +55,7 @@ struct KidRow: View {
                     }
                 }
             }
-            ActionButtons()
+            ActionButtons(viewModel: viewModel.actionButtonsViewModel)
         }
         .padding(.horizontal)
     }
@@ -53,11 +64,21 @@ struct KidRow: View {
 struct KidRow_Previews: PreviewProvider {
     static var previews: some View {
         KidRow(
-            kid: Kid(
-                name: "Brandon David Martinez Noblecilla",
-                age: 6,
-                image: Image("brandon"),
-                starCount: 4)
+            viewModel: KidRowViewModel(
+                kid: Kid(
+                    name: "Brandon David Martinez Noblecilla",
+                    age: 6,
+                    image: Image("brandon"),
+                    starCount: 14
+                ),
+                actionButtonsViewModel: ActionButtonsViewModel {
+print("ferferf")
+                } removeAction: {
+                    print("ferferf")
+                } addAction: {
+                    print("ferferf")
+                }
+            )
         )
     }
 }

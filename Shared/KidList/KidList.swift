@@ -60,12 +60,24 @@ final class KidListViewModel: ObservableObject {
 struct KidList: View {
     @StateObject
     var viewModel = KidListViewModel(kids: [])
+
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.kids){ kid in
-                        KidRow(kid: kid)
+                        KidRow(
+                            viewModel: KidRowViewModel(
+                                kid: kid,
+                                actionButtonsViewModel: ActionButtonsViewModel {
+                                    print("share")
+                                } removeAction: {
+                                    print("remove")
+                                } addAction: {
+                                    print("add")
+                                }
+                            )
+                        )
                     }
                 }
             }

@@ -21,6 +21,8 @@
 		7524FC8B2721F88F00494E23 /* KidRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7524FC892721F88F00494E23 /* KidRow.swift */; };
 		7524FC8D2722051C00494E23 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7524FC8C2722051C00494E23 /* SettingsView.swift */; };
 		7524FC8E2722051C00494E23 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7524FC8C2722051C00494E23 /* SettingsView.swift */; };
+		7541D6BC2722260A002EC73B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7541D6BB2722260A002EC73B /* SettingsViewModel.swift */; };
+		7541D6BD2722260A002EC73B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7541D6BB2722260A002EC73B /* SettingsViewModel.swift */; };
 		75FECAA62721164A0084849A /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FECAA52721164A0084849A /* ActionButtons.swift */; };
 		75FECAA72721164A0084849A /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FECAA52721164A0084849A /* ActionButtons.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,7 @@
 		751001AA271F419500505CA3 /* KidProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidProfile.swift; sourceTree = "<group>"; };
 		7524FC892721F88F00494E23 /* KidRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidRow.swift; sourceTree = "<group>"; };
 		7524FC8C2722051C00494E23 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7541D6BB2722260A002EC73B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		75FECAA52721164A0084849A /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				7524FC8C2722051C00494E23 /* SettingsView.swift */,
+				7541D6BB2722260A002EC73B /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -243,6 +247,7 @@
 				75FECAA62721164A0084849A /* ActionButtons.swift in Sources */,
 				75100194271F3B7500505CA3 /* ParagonApp.swift in Sources */,
 				751001A8271F3CAB00505CA3 /* KidList.swift in Sources */,
+				7541D6BC2722260A002EC73B /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +262,7 @@
 				75FECAA72721164A0084849A /* ActionButtons.swift in Sources */,
 				75100195271F3B7500505CA3 /* ParagonApp.swift in Sources */,
 				751001A9271F3CAB00505CA3 /* KidList.swift in Sources */,
+				7541D6BD2722260A002EC73B /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
