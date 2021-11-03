@@ -15,6 +15,7 @@ struct Kid: Identifiable {
     let starCount: Int
 }
 
+@MainActor
 final class KidListViewModel: ObservableObject {
     let actionButtonsViewModel: ActionButtonsViewModel
     @Published
@@ -31,7 +32,7 @@ final class KidListViewModel: ObservableObject {
         }
     }
 
-    func loadKids() {
+    func loadKids() async {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.kids = [
                 Kid(
@@ -94,7 +95,9 @@ struct KidList: View {
             }
         }
         .onAppear {
-            viewModel.loadKids()
+            Task {
+                await viewModel.loadKids()
+            }
         }
     }
 }
